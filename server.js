@@ -10,7 +10,7 @@ var backend = new ShareDB();
 createDoc(startServer);
 
 var key = fs.readFileSync('../ssl/keys/eb53b_64655_02d72e74c55372ae9aa8e00b3a42f940.key');
-var cert = fs.readFileSync('../ssl/certs/sar_announcements_com_bc985_f04bd_1530623335_9f3e7c1f324c2501ea4df74a0f7ac963.crt');
+var cert = fs.readFileSync('../ssl/certs/sar_announcements_com_bc985_f04bd_1535666043_6bb91af18461de5919e24a57abe10998.crt');
 
 var sslOptions = {
   key: key,

@@ -1,11 +1,20 @@
-var http = require('http');
+var https = require('https');
 var express = require('express');
 var ShareDB = require('sharedb');
 var WebSocket = require('ws');
+const forceSsl = require('express-force-ssl');
 var WebSocketJSONStream = require('websocket-json-stream');
 
 var backend = new ShareDB();
 createDoc(startServer);
+
+var key = fs.readFileSync('../ssl/keys/bc985_f04bd_235c244c08260d15d58795838ada361a.key');
+var cert = fs.readFileSync('../ssl/certs/sar_announcements_com_bc985_f04bd_1530623335_9f3e7c1f324c2501ea4df74a0f7ac963.crt');
+
+var sslOptions = {
+  key: key,
+  cert: cert
+};
 
 // Create initial document then fire callback
 function createDoc(callback) {
@@ -23,12 +32,15 @@ function createDoc(callback) {
 
 function startServer() {
   // Create a web server to serve files and listen to WebSocket connections
-//  var app = express();
-//  app.use(express.static('static'));
-//  var server = http.createServer(app);
+    var app = express();
+    app.use(forceSsl);
+    app.options('*', cors());
+    
+    //  app.use(express.static('static'));
+    var server = https.createServer(sslOptions, app);
 
   // Connect any incoming WebSocket connection to ShareDB
-    var wss = new WebSocket.Server({ port: 8080 });
+    var wss = new WebSocket.Server({ server: server });
 //    var wss = new WebSocket('ws://dev.researchcatalogue.net/share');
 
 
@@ -38,14 +50,14 @@ function startServer() {
     });
 
 
-    wss.on('open', function open() {
-	ws.send('something');
-    });
+    // wss.on('open', function open() {
+    // 	wss.send('something');
+    // });
     
-    wss.on('message', function incoming(data) {
-	console.log(data);
-    });
+    // wss.on('message', function incoming(data) {
+    // 	console.log(data);
+    // });
 
-  //  server.listen(8080);
-  //console.log('Listening on http://localhost:8080');
+    server.listen(8080);
+    console.log('Listening on http://localhost:8080');
 }

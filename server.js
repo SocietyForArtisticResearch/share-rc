@@ -2,6 +2,7 @@ var https = require('https');
 var express = require('express');
 var ShareDB = require('sharedb');
 var WebSocket = require('ws');
+var cors = require('cors');
 var fs = require('fs');
 const forceSsl = require('express-force-ssl');
 var WebSocketJSONStream = require('websocket-json-stream');

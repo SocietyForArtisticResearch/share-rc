@@ -23,18 +23,18 @@ function createDoc(callback) {
 
 function startServer() {
   // Create a web server to serve files and listen to WebSocket connections
-  var app = express();
+//  var app = express();
 //  app.use(express.static('static'));
-  var server = http.createServer(app);
+//  var server = http.createServer(app);
 
   // Connect any incoming WebSocket connection to ShareDB
-    var wss = new WebSocket.Server({server: server});
+    var wss = new WebSocket.Server({ port: 8080 });
 //    var wss = new WebSocket('ws://dev.researchcatalogue.net/share');
     wss.on('connection', function(ws, req) {
 	var stream = new WebSocketJSONStream(ws);
 	backend.listen(stream);
     });
 
-    server.listen(8080);
+  //  server.listen(8080);
   //console.log('Listening on http://localhost:8080');
 }

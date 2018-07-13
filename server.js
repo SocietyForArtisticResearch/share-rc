@@ -30,9 +30,20 @@ function startServer() {
   // Connect any incoming WebSocket connection to ShareDB
     var wss = new WebSocket.Server({ port: 8080 });
 //    var wss = new WebSocket('ws://dev.researchcatalogue.net/share');
+
+
     wss.on('connection', function(ws, req) {
 	var stream = new WebSocketJSONStream(ws);
 	backend.listen(stream);
+    });
+
+
+    wss.on('open', function open() {
+	ws.send('something');
+    });
+    
+    wss.on('message', function incoming(data) {
+	console.log(data);
     });
 
   //  server.listen(8080);

@@ -1,4 +1,5 @@
-var https = require('https');
+//var https = require('https');
+var http = require('http');
 var express = require('express');
 var ShareDB = require('sharedb');
 var WebSocket = require('ws');
@@ -35,11 +36,12 @@ function createDoc(callback) {
 function startServer() {
   // Create a web server to serve files and listen to WebSocket connections
     var app = express();
-    app.use(forceSsl);
-    app.options('*', cors());
+//    app.use(forceSsl);
+  //  app.options('*', cors());
     
     //  app.use(express.static('static'));
-    var server = https.createServer(sslOptions, app);
+//    var server = https.createServer(sslOptions, app);
+    var server = http.createServer(sslOptions, app);
 
   // Connect any incoming WebSocket connection to ShareDB
     var wss = new WebSocket.Server({ server: server });

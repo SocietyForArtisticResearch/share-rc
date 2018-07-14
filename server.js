@@ -36,8 +36,8 @@ function createDoc(callback) {
       doc.create([{insert: 'Hi!'}], 'rich-text', callback);
       return;
     }
-      callback();
       console.log(backend);
+      callback();
   });
 }
 

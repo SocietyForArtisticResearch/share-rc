@@ -19,19 +19,19 @@ var sslOptions = {
   cert: cert
 };
 
-// Create initial document then fire callback
-// function createDoc(callback) {
-//   var connection = backend.connect();
-//   var doc = connection.get('examples', 'textarea');
-//   doc.fetch(function(err) {
-//     if (err) throw err;
-//     if (doc.type === null) {
-//       doc.create('', callback);
-//       return;
-//     }
-//     callback();
-//   });
-// }
+//Create initial document then fire callback
+function createDoc(callback) {
+  var connection = backend.connect();
+  var doc = connection.get('examples', 'textarea');
+  doc.fetch(function(err) {
+    if (err) throw err;
+    if (doc.type === null) {
+      doc.create('', callback);
+      return;
+    }
+    callback();
+  });
+}
 
 function startServer() {
   // Create a web server to serve files and listen to WebSocket connections
@@ -48,30 +48,22 @@ function startServer() {
 //    var wss = new WebSocket('ws://dev.researchcatalogue.net/share');
 
 
-    // wss.on('connection', function(ws, req) {
-    // 	var stream = new WebSocketJSONStream(ws);
-    // 	backend.listen(stream);
-    // });
-
-    wss.on('connection', function connection(ws) {
-	ws.on('message', function incoming(message) {
-	    console.log('received: %s', message);
-	});
-	
-	ws.send('something');
+    wss.on('connection', function(ws, req) {
+    	var stream = new WebSocketJSONStream(ws);
+    	backend.listen(stream);
+	console.log("connected");
     });
-    
 
-    // wss.on('open', function open() {
-    // 	wss.send('something');
+    // wss.on('connection', function connection(ws) {
+    // 	ws.on('message', function incoming(message) {
+    // 	    console.log('received: %s', message);
+    // 	});
+	
+    // 	ws.send('something');
     // });
     
-    // wss.on('message', function incoming(data) {
-    // 	console.log(data);
-    // });
-
     server.listen(8999);
     console.log('Listening on 8999');
 }
 
-startServer();
+createDoc(startServer);

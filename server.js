@@ -38,7 +38,7 @@ function createDoc(callback) {
     doc.fetch(function(err) {
 	if (err) throw err;
 	if (doc.type === null) {
-	    doc.create('', callback);
+	    doc.create({content: 'Type something ...'}, callback);
 	    return;
 	}
 	callback();

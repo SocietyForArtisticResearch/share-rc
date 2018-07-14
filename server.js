@@ -36,9 +36,12 @@ function createDoc(callback) {
       doc.create([{insert: 'Hi!'}], 'rich-text', callback);
       return;
     }
-    callback();
+      callback();
+      console.log(backend);
   });
 }
+
+
 //Create initial document then fire callback
 // function createDoc(callback) {
 //   var connection = backend.connect();

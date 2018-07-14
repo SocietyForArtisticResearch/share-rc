@@ -40,8 +40,8 @@ function startServer() {
     app.options('*', cors());
     
     //  app.use(express.static('static'));
-//    var server = https.createServer(sslOptions, app);
-    var server = https.createServer(app);
+    var server = https.createServer(sslOptions, app);
+//    var server = https.createServer(app);
 
   // Connect any incoming WebSocket connection to ShareDB
     var wss = new WebSocket.Server({ server: server });

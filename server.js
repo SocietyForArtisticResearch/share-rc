@@ -29,14 +29,14 @@ ShareDB.types.register(richText.type);
 // Create initial document then fire callback
 function createDoc(callback) {
   var connection = backend.connect();
-  var doc = connection.get('examples', 'richtext');
+    var doc = connection.get('examples', 'richtext');
+    console.log("creating doc");
   doc.fetch(function(err) {
     if (err) throw err;
     if (doc.type === null) {
       doc.create([{insert: 'Hi!'}], 'rich-text', callback);
       return;
     }
-      console.log(backend);
       callback();
   });
 }

@@ -65,3 +65,5 @@ function startServer() {
     server.listen(8999);
     console.log('Listening on 8999');
 }
+
+startServer();

@@ -16,7 +16,10 @@
     "fs": "0.0.1-security",
     "http": "0.0.0",
     "https": "^1.0.0",
+    "ot-text": "^1.0.1",
     "sharedb": "^1.0.0-beta.9",
+    "stream": "0.0.2",
+    "util": "^0.11.0",
     "websocket-json-stream": "0.0.3",
     "ws": "^5.2.2"
   }

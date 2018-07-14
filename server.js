@@ -33,7 +33,7 @@ function createDoc(callback) {
   doc.fetch(function(err) {
     if (err) throw err;
     if (doc.type === null) {
-      doc.create([{content: 'Hi!'}], 'rich-text', callback);
+      doc.create([{insert: 'Hi!'}], 'rich-text', callback);
       return;
     }
     callback();

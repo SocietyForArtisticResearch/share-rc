@@ -7,7 +7,7 @@ var cors = require('cors');
 var fs = require('fs');
 const forceSsl = require('express-force-ssl');
 var WebSocketJSONStream = require('websocket-json-stream');
-//var otText = require('ot-text');
+var otText = require('ot-text');
 var richText = require('rich-text');
 //var Duplex = require('stream').Duplex;
 //var inherits = require('util').inherits;
@@ -21,7 +21,10 @@ var sslOptions = {
   cert: cert
 };
 
-ShareDB.types.register(richText.type);
+
+ShareDB.types.map['json0'].registerSubtype(otText.type);
+
+//ShareDB.types.register(richText.type);
 var backend = new ShareDB();
 createDoc(startServer);
 
@@ -35,7 +38,7 @@ function createDoc(callback) {
     doc.fetch(function(err) {
 	if (err) throw err;
 	if (doc.type === null) {
-	    doc.create([{insert: 'Hi!'}], 'rich-text', callback);
+	    doc.create('', callback);
 	    return;
 	}
 	callback();

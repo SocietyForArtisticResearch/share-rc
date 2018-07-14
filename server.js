@@ -9,7 +9,7 @@ const forceSsl = require('express-force-ssl');
 var WebSocketJSONStream = require('websocket-json-stream');
 
 var backend = new ShareDB();
-createDoc(startServer);
+//createDoc(startServer);
 
 var key = fs.readFileSync('../ssl/keys/d9234_a2301_705db40a0ff214b1f5a913edd23c8c4c.key');
 var cert = fs.readFileSync('../ssl/certs/doebereiner_org_d9234_a2301_1539084486_812b563ca9aec683338d51ea92786845.crt');
@@ -20,18 +20,18 @@ var sslOptions = {
 };
 
 // Create initial document then fire callback
-function createDoc(callback) {
-  var connection = backend.connect();
-  var doc = connection.get('examples', 'textarea');
-  doc.fetch(function(err) {
-    if (err) throw err;
-    if (doc.type === null) {
-      doc.create('', callback);
-      return;
-    }
-    callback();
-  });
-}
+// function createDoc(callback) {
+//   var connection = backend.connect();
+//   var doc = connection.get('examples', 'textarea');
+//   doc.fetch(function(err) {
+//     if (err) throw err;
+//     if (doc.type === null) {
+//       doc.create('', callback);
+//       return;
+//     }
+//     callback();
+//   });
+// }
 
 function startServer() {
   // Create a web server to serve files and listen to WebSocket connections
@@ -48,19 +48,19 @@ function startServer() {
 //    var wss = new WebSocket('ws://dev.researchcatalogue.net/share');
 
 
-    wss.on('connection', function(ws, req) {
-	var stream = new WebSocketJSONStream(ws);
-	backend.listen(stream);
+    // wss.on('connection', function(ws, req) {
+    // 	var stream = new WebSocketJSONStream(ws);
+    // 	backend.listen(stream);
+    // });
+
+
+    wss.on('open', function open() {
+    	wss.send('something');
     });
-
-
-    // wss.on('open', function open() {
-    // 	wss.send('something');
-    // });
     
-    // wss.on('message', function incoming(data) {
-    // 	console.log(data);
-    // });
+    wss.on('message', function incoming(data) {
+    	console.log(data);
+    });
 
     server.listen(8999);
     console.log('Listening on 8999');

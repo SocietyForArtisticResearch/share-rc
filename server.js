@@ -53,14 +53,22 @@ function startServer() {
     // 	backend.listen(stream);
     // });
 
-
-    wss.on('open', function open() {
-    	wss.send('something');
+    wss.on('connection', function connection(ws) {
+	ws.on('message', function incoming(message) {
+	    console.log('received: %s', message);
+	});
+	
+	ws.send('something');
     });
     
-    wss.on('message', function incoming(data) {
-    	console.log(data);
-    });
+
+    // wss.on('open', function open() {
+    // 	wss.send('something');
+    // });
+    
+    // wss.on('message', function incoming(data) {
+    // 	console.log(data);
+    // });
 
     server.listen(8999);
     console.log('Listening on 8999');

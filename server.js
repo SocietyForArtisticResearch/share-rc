@@ -71,7 +71,7 @@ function startServer() {
     var wss = new WebSocket.Server({ server: server });
 //    var wss = new WebSocket('ws://dev.researchcatalogue.net/share');
 
-    console.log(backend);
+    console.log(backend.db.docs);
 
     wss.on('connection', function(ws, req) {
 	var stream = new WebSocketJSONStream(ws);

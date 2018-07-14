@@ -7,9 +7,10 @@ var cors = require('cors');
 var fs = require('fs');
 const forceSsl = require('express-force-ssl');
 var WebSocketJSONStream = require('websocket-json-stream');
-var otText = require('ot-text');
-var Duplex = require('stream').Duplex;
-var inherits = require('util').inherits;
+//var otText = require('ot-text');
+var richText = require('rich-text');
+//var Duplex = require('stream').Duplex;
+//var inherits = require('util').inherits;
 
 
 var backend = new ShareDB();

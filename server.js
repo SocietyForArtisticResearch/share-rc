@@ -54,10 +54,10 @@ function addExposition(id,markdown) {
 	if (doc.type === null) {
 	    doc.create({content: markdown});
 	    return;
-	}
+	};
+	console.log("create expo");
+	console.log(backend.db.docs);
     });
-    console.log("create expo");
-    console.log(backend.db.docs);
 }
 
 
@@ -67,13 +67,14 @@ function removeExposition(id,markdown) {
     doc.fetch(function(err) {
 	if (err) throw err;
 	if (doc.type !== null) {
-	    doc.del();
 	    doc.destroy();
+//	    delete backend.db.docs.expositions[id];
 	    return;
-	}
+	};
+
+	console.log("remove expo");
+	console.log(backend.db.docs);
     });
-    console.log("remove expo");
-    console.log(backend.db.docs);
 }
 
 
@@ -148,5 +149,7 @@ function startServer() {
     server.listen(8999);
     console.log('Listening on 8999');
 }
+
+setInterval(() => console.log(backend.db.docs), 10000);
 
 startServer();

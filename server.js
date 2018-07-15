@@ -55,8 +55,8 @@ function addExposition(id,markdown) {
 	    doc.create({content: markdown});
 	    return;
 	};
-	console.log("create expo");
-	console.log(backend.db.docs);
+	// console.log("create expo");
+	// console.log(backend.db.docs);
     });
 }
 
@@ -68,12 +68,11 @@ function removeExposition(id,markdown) {
 	if (err) throw err;
 	if (doc.type !== null) {
 	    doc.destroy();
-//	    delete backend.db.docs.expositions[id];
+	    delete backend.db.docs.expositions[id];
 	    return;
 	};
-
-	console.log("remove expo");
-	console.log(backend.db.docs);
+	// console.log("remove expo");
+	// console.log(backend.db.docs);
     });
 }
 

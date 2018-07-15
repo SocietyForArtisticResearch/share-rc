@@ -97,7 +97,7 @@ function startServer() {
 	console.log("connection");
 	// console.log(req);
     	ws.on('message', function incoming(message) {
-    	    console.log('received: %s', message);
+	    let messageObj = JSON.parse(message);
 	    // create exposition
 	    console.log(message.message);
 	    console.log(message.message == "open exposition");

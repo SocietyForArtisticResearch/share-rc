@@ -1,5 +1,4 @@
 var https = require('https');
-//var http = require('http');
 var express = require('express');
 var ShareDB = require('sharedb');
 var WebSocket = require('ws');
@@ -9,8 +8,6 @@ const forceSsl = require('express-force-ssl');
 var WebSocketJSONStream = require('websocket-json-stream');
 var otText = require('ot-text');
 var richText = require('rich-text');
-//var Duplex = require('stream').Duplex;
-//var inherits = require('util').inherits;
 
 
 var key = fs.readFileSync('../ssl/keys/d9234_a2301_705db40a0ff214b1f5a913edd23c8c4c.key');
@@ -24,26 +21,8 @@ var sslOptions = {
 
 ShareDB.types.map['json0'].registerSubtype(otText.type);
 
-//ShareDB.types.register(richText.type);
 var backend = new ShareDB();
-//createDoc(startServer);
 
-
-
-
-// Create initial document then fire callback
-// function createDoc(callback) {
-//     var connection = backend.connect();
-//     var doc = connection.get('examples', 'richtext');
-//     doc.fetch(function(err) {
-// 	if (err) throw err;
-// 	if (doc.type === null) {
-// 	    doc.create({content: 'Type something ...'}, callback);
-// 	    return;
-// 	}
-// 	callback();
-//     });
-// }
 
 
 function addExposition(id,markdown) {

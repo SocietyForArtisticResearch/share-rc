@@ -26,22 +26,35 @@ ShareDB.types.map['json0'].registerSubtype(otText.type);
 
 //ShareDB.types.register(richText.type);
 var backend = new ShareDB();
-createDoc(startServer);
+//createDoc(startServer);
 
 
 
 
 // Create initial document then fire callback
-function createDoc(callback) {
+// function createDoc(callback) {
+//     var connection = backend.connect();
+//     var doc = connection.get('examples', 'richtext');
+//     doc.fetch(function(err) {
+// 	if (err) throw err;
+// 	if (doc.type === null) {
+// 	    doc.create({content: 'Type something ...'}, callback);
+// 	    return;
+// 	}
+// 	callback();
+//     });
+// }
+
+
+function addExposition(id,markdown) {
     var connection = backend.connect();
-    var doc = connection.get('examples', 'richtext');
+    var doc = connection.get('expositions', id);
     doc.fetch(function(err) {
 	if (err) throw err;
 	if (doc.type === null) {
-	    doc.create({content: 'Type something ...'}, callback);
+	    doc.create({content: markdown});
 	    return;
 	}
-	callback();
     });
 }
 
@@ -56,19 +69,6 @@ function addReader(id) {
     }
 }
 
-//Create initial document then fire callback
-// function createDoc(callback) {
-//   var connection = backend.connect();
-//   var doc = connection.get('examples', 'textarea');
-//   doc.fetch(function(err) {
-//     if (err) throw err;
-//     if (doc.type === null) {
-//       doc.create('', callback);
-//       return;
-//     }
-//     callback();
-//   });
-// }
 
 function startServer() {
   // Create a web server to serve files and listen to WebSocket connections
@@ -99,26 +99,25 @@ function startServer() {
     	ws.on('message', function incoming(message) {
     	    console.log('received: %s', message);
 	    // create exposition
-	    ws.send('exposition created');
-
-	    // let stream = new WebSocketJSONStream(ws);
-     	    // backend.listen(stream);
-	    
+	    if (message.message == "open exposition") {
+		addExposition(message.id, message.markdown);
+		ws.send('exposition created');
+		    
+		let stream = new WebSocketJSONStream(ws);
+     		backend.listen(stream);
+		addReader(message.id);
+	    }
     	});
-	
-
-	// backend.use('query', function query(queryString) {
-	//     console.log(queryString);
-	// });
-	
+		
 	ws.on('close', function close() {
+	    // remove reader
 	    console.log('disconnected');
 	});
 	
-    	//ws.send('something');
     });
     
     server.listen(8999);
     console.log('Listening on 8999');
 }
 
+startServer();

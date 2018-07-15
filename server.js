@@ -56,7 +56,27 @@ function addExposition(id,markdown) {
 	    return;
 	}
     });
+    console.log("create expo");
+    console.log(backend.db.docs);
 }
+
+
+function removeExposition(id,markdown) {
+    var connection = backend.connect();
+    var doc = connection.get('expositions', id);
+    doc.fetch(function(err) {
+	if (err) throw err;
+	if (doc.type !== null) {
+	    doc.del();
+	    doc.destroy();
+	    return;
+	}
+    });
+    console.log("remove expo");
+    console.log(backend.db.docs);
+}
+
+
 
 var openExpositions = {};
 
@@ -67,9 +87,23 @@ function addReader(id) {
     } else {
 	openExpositions[id] = currentN + 1;
     }
+    console.log("added reader");
+    console.log(openExpositions);
 }
 
 // todo: remove reader, delete doc if no readers
+function removeReader(id) {
+    let currentN = openExpositions[id];
+    if (currentN != undefined) {
+	openExpositions[id] = currentN - 1;
+	if (openExpositions[id] <= 0) {
+	    removeExposition(id);
+	}
+    }
+    console.log("removed reader");
+    console.log(openExpositions);
+}
+
 
 
 function startServer() {
@@ -80,40 +114,32 @@ function startServer() {
     
     //  app.use(express.static('static'));
     var server = https.createServer(sslOptions, app);
-//    var server = https.createServer(app);
 
-  // Connect any incoming WebSocket connection to ShareDB
+    // Connect any incoming WebSocket connection to ShareDB
     var wss = new WebSocket.Server({ server: server });
-//    var wss = new WebSocket('ws://dev.researchcatalogue.net/share');
-
-//    console.log(backend.db.docs);
-
-    // wss.on('connection', function(ws, req) {
-    // 	var stream = new WebSocketJSONStream(ws);
-    // 	backend.listen(stream);
-    // 	console.log("connected");
-    // });
     
 
     wss.on('connection', function connection(ws, req) {
 	console.log("connection");
 	// console.log(req);
+	let id = "";
+	
     	ws.on('message', function incoming(message) {
 	    let messageObj = JSON.parse(message);
 	    // create exposition
 	    if (messageObj.message == "open exposition") {
 		addExposition(messageObj.id, messageObj.markdown);
+		id = messageObj.id;
 		ws.send('exposition created');		    
 		let stream = new WebSocketJSONStream(ws);
      		backend.listen(stream);
 		addReader(messageObj.id);
 
-		console.log(backend.db.docs);
 	    }
     	});
 		
 	ws.on('close', function close() {
-	    // remove reader
+	    removeReader(id);
 	    console.log('disconnected');
 	});
 	

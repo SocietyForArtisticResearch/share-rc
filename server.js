@@ -84,7 +84,7 @@ function startServer() {
     var wss = new WebSocket.Server({ server: server });
 //    var wss = new WebSocket('ws://dev.researchcatalogue.net/share');
 
-    console.log(backend.db.docs);
+//    console.log(backend.db.docs);
 
     // wss.on('connection', function(ws, req) {
     // 	var stream = new WebSocketJSONStream(ws);
@@ -99,6 +99,8 @@ function startServer() {
     	ws.on('message', function incoming(message) {
     	    console.log('received: %s', message);
 	    // create exposition
+	    console.log(message.message);
+	    console.log(message.message == "open exposition");
 	    if (message.message == "open exposition") {
 		addExposition(message.id, message.markdown);
 		ws.send('exposition created');

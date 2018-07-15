@@ -83,7 +83,7 @@ function startServer() {
     // });
     
 
-    wss.on('open', function connection(ws) {
+    wss.on('connection', function connection(ws) {
 	console.log("open");
 	
     	ws.on('message', function incoming(message) {

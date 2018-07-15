@@ -98,10 +98,14 @@ function startServer() {
 	// console.log(req);
     	ws.on('message', function incoming(message) {
     	    console.log('received: %s', message);
+	    // create exposition
+	    ws.send('exposition created');
+
+	    // let stream = new WebSocketJSONStream(ws);
+     	    // backend.listen(stream);
+	    
     	});
 	
-	var stream = new WebSocketJSONStream(ws);
-     	backend.listen(stream);
 
 	// backend.use('query', function query(queryString) {
 	//     console.log(queryString);

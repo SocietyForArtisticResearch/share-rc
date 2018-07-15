@@ -45,6 +45,16 @@ function createDoc(callback) {
     });
 }
 
+var openExpositions = {};
+
+function addReader(id) {
+    let currentN = openExpositions[id];
+    if (currentN == undefined) {
+	openExpositions[id] = 1;
+    } else {
+	openExpositions[id] = currentN + 1;
+    }
+}
 
 //Create initial document then fire callback
 // function createDoc(callback) {
@@ -83,9 +93,9 @@ function startServer() {
     // });
     
 
-    wss.on('connection', function connection(ws) {
+    wss.on('connection', function connection(ws, req) {
 	console.log("connection:");
-	console.log(ws);
+	console.log(req);
 	
     	ws.on('message', function incoming(message) {
     	    console.log('received: %s', message);

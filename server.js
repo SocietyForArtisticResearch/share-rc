@@ -87,8 +87,8 @@ function addReader(id) {
     } else {
 	openExpositions[id] = currentN + 1;
     }
-    console.log("added reader");
-    console.log(openExpositions);
+    // console.log("added reader");
+    // console.log(openExpositions);
 }
 
 // todo: remove reader, delete doc if no readers
@@ -100,8 +100,8 @@ function removeReader(id) {
 	    removeExposition(id);
 	}
     }
-    console.log("removed reader");
-    console.log(openExpositions);
+    // console.log("removed reader");
+    // console.log(openExpositions);
 }
 
 
@@ -140,7 +140,7 @@ function startServer() {
 		
 	ws.on('close', function close() {
 	    removeReader(id);
-	    console.log('disconnected');
+//	    console.log('disconnected');
 	});
 	
     });
@@ -149,6 +149,6 @@ function startServer() {
     console.log('Listening on 8999');
 }
 
-setInterval(() => console.log(backend.db.docs), 10000);
+//setInterval(() => console.log(backend.db.docs), 10000);
 
 startServer();

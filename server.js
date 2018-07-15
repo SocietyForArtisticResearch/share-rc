@@ -96,19 +96,17 @@ function startServer() {
     wss.on('connection', function connection(ws, req) {
 	console.log("connection");
 	// console.log(req);
-
-	var stream = new WebSocketJSONStream(ws);
-     	backend.listen(stream);
-
-	
-	backend.use('query', function query(queryString) {
-	    console.log(queryString);
-	});
-	
     	ws.on('message', function incoming(message) {
     	    console.log('received: %s', message);
     	});
+	
+	var stream = new WebSocketJSONStream(ws);
+     	backend.listen(stream);
 
+	// backend.use('query', function query(queryString) {
+	//     console.log(queryString);
+	// });
+	
 	ws.on('close', function close() {
 	    console.log('disconnected');
 	});

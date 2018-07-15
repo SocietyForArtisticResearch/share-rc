@@ -76,25 +76,26 @@ function startServer() {
 
     console.log(backend.db.docs);
 
-    wss.on('connection', function(ws, req) {
-	var stream = new WebSocketJSONStream(ws);
-	backend.listen(stream);
-	console.log("connected");
-    });
-    
     // wss.on('connection', function(ws, req) {
     // 	var stream = new WebSocketJSONStream(ws);
     // 	backend.listen(stream);
     // 	console.log("connected");
     // });
+    
 
-    // wss.on('connection', function connection(ws) {
-    // 	ws.on('message', function incoming(message) {
-    // 	    console.log('received: %s', message);
-    // 	});
+    wss.on('open', function connection(ws) {
+	console.log("open");
 	
-    // 	ws.send('something');
-    // });
+    	ws.on('message', function incoming(message) {
+    	    console.log('received: %s', message);
+    	});
+
+	ws.on('close', function close() {
+	    console.log('disconnected');
+	});
+	
+    	//ws.send('something');
+    });
     
     server.listen(8999);
     console.log('Listening on 8999');

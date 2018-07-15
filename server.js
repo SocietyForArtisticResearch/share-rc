@@ -69,6 +69,8 @@ function addReader(id) {
     }
 }
 
+// todo: remove reader, delete doc if no readers
+
 
 function startServer() {
   // Create a web server to serve files and listen to WebSocket connections
@@ -99,15 +101,14 @@ function startServer() {
     	ws.on('message', function incoming(message) {
 	    let messageObj = JSON.parse(message);
 	    // create exposition
-	    console.log(messageObj.message);
-	    console.log(messageObj.message == "open exposition");
 	    if (messageObj.message == "open exposition") {
 		addExposition(messageObj.id, messageObj.markdown);
-		ws.send('exposition created');
-		    
+		ws.send('exposition created');		    
 		let stream = new WebSocketJSONStream(ws);
      		backend.listen(stream);
 		addReader(messageObj.id);
+
+		console.log(backend.db.docs);
 	    }
     	});
 		

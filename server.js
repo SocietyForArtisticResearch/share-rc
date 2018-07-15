@@ -84,7 +84,8 @@ function startServer() {
     
 
     wss.on('connection', function connection(ws) {
-	console.log("open");
+	console.log("connection:");
+	console.log(ws);
 	
     	ws.on('message', function incoming(message) {
     	    console.log('received: %s', message);

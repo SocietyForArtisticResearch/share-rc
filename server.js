@@ -99,15 +99,15 @@ function startServer() {
     	ws.on('message', function incoming(message) {
 	    let messageObj = JSON.parse(message);
 	    // create exposition
-	    console.log(message.message);
-	    console.log(message.message == "open exposition");
-	    if (message.message == "open exposition") {
-		addExposition(message.id, message.markdown);
+	    console.log(messageObj.message);
+	    console.log(messageObj.message == "open exposition");
+	    if (messageObj.message == "open exposition") {
+		addExposition(messageObj.id, messageObj.markdown);
 		ws.send('exposition created');
 		    
 		let stream = new WebSocketJSONStream(ws);
      		backend.listen(stream);
-		addReader(message.id);
+		addReader(messageObj.id);
 	    }
     	});
 		

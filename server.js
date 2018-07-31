@@ -1,13 +1,13 @@
-var https = require('https');
-var express = require('express');
-var ShareDB = require('sharedb');
-var WebSocket = require('ws');
-var cors = require('cors');
-var fs = require('fs');
+const https = require('https');
+const express = require('express');
+const ShareDB = require('sharedb');
+const WebSocket = require('ws');
+const cors = require('cors');
+const fs = require('fs');
 const forceSsl = require('express-force-ssl');
-var WebSocketJSONStream = require('websocket-json-stream');
-var otText = require('ot-text');
-var richText = require('rich-text');
+const WebSocketJSONStream = require('websocket-json-stream');
+const otText = require('ot-text');
+//const richText = require('rich-text');
 
 
 var key = fs.readFileSync('../ssl/keys/d9234_a2301_705db40a0ff214b1f5a913edd23c8c4c.key');
@@ -22,7 +22,6 @@ var sslOptions = {
 ShareDB.types.map['json0'].registerSubtype(otText.type);
 
 var backend = new ShareDB();
-
 
 
 function addExposition(id,markdown) {

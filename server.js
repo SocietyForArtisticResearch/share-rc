@@ -112,8 +112,10 @@ function startServer() {
 		let stream = new WebSocketJSONStream(ws);
      		backend.listen(stream);
 		addReader(messageObj.id);
-
+	    } else {
+		ws.send("Message not understood");
 	    }
+	    
     	});
 		
 	ws.on('close', function close() {

@@ -15,7 +15,7 @@ const otText = require('ot-text');
 
 //
 var key = fs.readFileSync('../ssl/keys/afac3_a89dd_f89bb458245e8929e172e39015776f67.key');
-var cert = fs.readFileSync('../ssl/certs/ar_announcements_com_afac3_a89dd_1549013806_75a12f038257b79286eb93690db998db.crt');
+var cert = fs.readFileSync('../ssl/certs/sar_announcements_com_afac3_a89dd_1549013806_75a12f038257b79286eb93690db998db.crt');
 
 // LD
 //var key = fs.readFileSync('../ssl/keys/d9234_a2301_705db40a0ff214b1f5a913edd23c8c4c.key');

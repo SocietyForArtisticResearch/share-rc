@@ -120,7 +120,7 @@ function startServer() {
     	ws.on('message', function incoming(message) {
 	    try {
 		let messageObj = JSON.parse(message);
-		console.log(messageObj);
+		//console.log(messageObj);
 		// create exposition
 		if (messageObj.message == "open exposition") {
 		    addExposition(messageObj.id, messageObj.markdown);

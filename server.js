@@ -135,6 +135,7 @@ function startServer() {
 		    ws.on('pong', heartbeat);
 		    
 		} else {
+		    console.log(message);
 		    ws.send("Message not understood");
 		}
 	    } catch(err) {

@@ -131,9 +131,9 @@ function startServer() {
 		    addReader(messageObj.id);
 
 		    // heartbeat
-		    ws.expositionId = id;
-		    ws.isAlive = true;
-		    ws.on('pong', heartbeat);
+		    // ws.expositionId = id;
+		    // ws.isAlive = true;
+		    // ws.on('pong', heartbeat);
 		    
 		} else {
 //		    console.log(message);

@@ -10,7 +10,8 @@ const otText = require('ot-text');
 //const richText = require('rich-text');
 
 var key = fs.readFileSync('../ssl/keys/eb53b_64655_02d72e74c55372ae9aa8e00b3a42f940.key');
-var cert = fs.readFileSync('../ssl/certs/sar_announcements_com_eb53b_64655_1549100876_7746f2c803c3577300d5015ad0e5b6b6.crt');
+//var cert = fs.readFileSync('../ssl/certs/sar_announcements_com_eb53b_64655_1549100876_7746f2c803c3577300d5015ad0e5b6b6.crt');
+var cert = fs.readFileSync('../ssl/certs/sar_announcements_com_afac3_a89dd_1549013806_75a12f038257b79286eb93690db998db.crt');
 
 //
 //var key = fs.readFileSync('../ssl/keys/afac3_a89dd_f89bb458245e8929e172e39015776f67.key');

@@ -17,7 +17,7 @@ const otText = require('ot-text');
 //var key = fs.readFileSync('../ssl/keys/afac3_a89dd_f89bb458245e8929e172e39015776f67.key');
 //var cert = fs.readFileSync('../ssl/certs/sar_announcements_com_afac3_a89dd_1543995450_c73b0a6ac4cfd0206fead7f33702ed7e.crt');
 
-var key = fs.readFileSync('../ssl/keys/b9bbc_1320b_e0afed7cfab5a7f953794f170a347a0d.key');
+var key = fs.readFileSync('../ssl/keys/d9234_a2301_705db40a0ff214b1f5a913edd23c8c4c.key');
 var cert = fs.readFileSync('../ssl/certs/doebereiner_org_d9234_a2301_1549141622_7f80359ad2e5312ba3aa5fa89f98d74f.crt');
 
 var sslOptions = {

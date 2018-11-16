@@ -131,14 +131,14 @@ function startServer() {
 		    addReader(messageObj.id);
 
 		    // heartbeat
-		    // ws.expositionId = id;
-		    // ws.isAlive = true;
-		    // ws.on('pong', heartbeat);
+		    ws.expositionId = id;
+		    ws.isAlive = true;
+		    ws.on('pong', heartbeat);
 		    
-		} else {
-//		    console.log(message);
-		    ws.send("Message not understood");
-		}
+		} // else {
+// //		    console.log(message);
+// 		    ws.send("Message not understood");
+// 		}
 	    } catch(err) {
 		console.log(err);
 	    }
@@ -156,7 +156,7 @@ function startServer() {
     const interval = setInterval(function ping() {
 	wss.clients.forEach(function each(ws) {
 	    if (ws.isAlive === false) {
-		console.log(`A client of exposition ${ws.expositioId} has lost connection`);
+		console.log(`A client of exposition ${ws.expositionId} has lost connection`);
 		removeReader(ws.expositionId);
 		return ws.terminate();
 	    }

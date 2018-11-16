@@ -120,6 +120,7 @@ function startServer() {
     	ws.on('message', function incoming(message) {
 	    try {
 		let messageObj = JSON.parse(message);
+		console.log(messageObj);
 		// create exposition
 		if (messageObj.message == "open exposition") {
 		    addExposition(messageObj.id, messageObj.markdown);
@@ -135,7 +136,7 @@ function startServer() {
 		    ws.on('pong', heartbeat);
 		    
 		} else {
-		    console.log(message);
+//		    console.log(message);
 		    ws.send("Message not understood");
 		}
 	    } catch(err) {

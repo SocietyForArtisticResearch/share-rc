@@ -9,16 +9,16 @@ const WebSocketJSONStream = require('websocket-json-stream');
 const otText = require('ot-text');
 //const richText = require('rich-text');
 
-var key = fs.readFileSync('../ssl/keys/eb53b_64655_02d72e74c55372ae9aa8e00b3a42f940.key');
+//var key = fs.readFileSync('../ssl/keys/eb53b_64655_02d72e74c55372ae9aa8e00b3a42f940.key');
 //var cert = fs.readFileSync('../ssl/certs/sar_announcements_com_eb53b_64655_1549100876_7746f2c803c3577300d5015ad0e5b6b6.crt');
-var cert = fs.readFileSync('../ssl/certs/sar_announcements_com_afac3_a89dd_1549013806_75a12f038257b79286eb93690db998db.crt');
+//var cert = fs.readFileSync('../ssl/certs/sar_announcements_com_afac3_a89dd_1549013806_75a12f038257b79286eb93690db998db.crt');
 
 //
 //var key = fs.readFileSync('../ssl/keys/afac3_a89dd_f89bb458245e8929e172e39015776f67.key');
 //var cert = fs.readFileSync('../ssl/certs/sar_announcements_com_afac3_a89dd_1543995450_c73b0a6ac4cfd0206fead7f33702ed7e.crt');
 
-//var key = fs.readFileSync('../ssl/keys/d9234_a2301_705db40a0ff214b1f5a913edd23c8c4c.key');
-//var cert = fs.readFileSync('../ssl/certs/doebereiner_org_d9234_a2301_1539084486_812b563ca9aec683338d51ea92786845.crt');
+var key = fs.readFileSync('../ssl/keys/b9bbc_1320b_e0afed7cfab5a7f953794f170a347a0d.key');
+var cert = fs.readFileSync('../ssl/certs/doebereiner_org_d9234_a2301_1539084486_812b563ca9aec683338d51ea92786845.crt');
 
 var sslOptions = {
   key: key,

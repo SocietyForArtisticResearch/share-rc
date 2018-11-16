@@ -110,17 +110,21 @@ function startServer() {
 	let id = "";
 	
     	ws.on('message', function incoming(message) {
-	    let messageObj = JSON.parse(message);
-	    // create exposition
-	    if (messageObj.message == "open exposition") {
-		addExposition(messageObj.id, messageObj.markdown);
-		id = messageObj.id;
-		ws.send('exposition created');		    
-		let stream = new WebSocketJSONStream(ws);
-     		backend.listen(stream);
-		addReader(messageObj.id);
-	    } else {
-		ws.send("Message not understood");
+	    try {
+		let messageObj = JSON.parse(message);
+		// create exposition
+		if (messageObj.message == "open exposition") {
+		    addExposition(messageObj.id, messageObj.markdown);
+		    id = messageObj.id;
+		    ws.send('exposition created');		    
+		    let stream = new WebSocketJSONStream(ws);
+     		    backend.listen(stream);
+		    addReader(messageObj.id);
+		} else {
+		    ws.send("Message not understood");
+		}
+	    } catch(err) {
+		console.log(err);
 	    }
 	    
     	});

@@ -90,6 +90,14 @@ function removeReader(id) {
 }
 
 
+/// heartbeat
+function noop() {}
+
+function heartbeat() {
+  this.isAlive = true;
+}
+
+
 
 function startServer() {
   // Create a web server to serve files and listen to WebSocket connections
@@ -120,6 +128,12 @@ function startServer() {
 		    let stream = new WebSocketJSONStream(ws);
      		    backend.listen(stream);
 		    addReader(messageObj.id);
+
+		    // heartbeat
+		    ws.expositionId = id;
+		    ws.isAlive = true;
+		    ws.on('pong', heartbeat);
+		    
 		} else {
 		    ws.send("Message not understood");
 		}
@@ -135,6 +149,19 @@ function startServer() {
 	});
 	
     });
+
+    // heartbeat, see if it is no longer alive 
+    const interval = setInterval(function ping() {
+	wss.clients.forEach(function each(ws) {
+	    if (ws.isAlive === false) {
+		console.log(`A client of exposition ${ws.expositioId} has lost connection`);
+		removeReader(ws.expositionId);
+		return ws.terminate();
+	    }
+	    ws.isAlive = false;
+	    ws.ping(noop);
+	});
+    }, 30000);
     
     server.listen(8999);
     console.log('Listening on 8999');

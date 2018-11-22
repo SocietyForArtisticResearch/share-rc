@@ -163,7 +163,7 @@ function startServer() {
 	    }
 	    ws.isAlive = false;
 	    ws.ping(noop);
-	    ws.send('connected');
+	    ws.send( { state: "connected" } );
 	});
     }, 30000);
     

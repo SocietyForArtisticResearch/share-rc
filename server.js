@@ -148,7 +148,7 @@ function startServer() {
 		
 	ws.on('close', function close() {
 	    removeReader(id);
-//	    console.log('disconnected');
+	    console.log('disconnected from ' + id);
 	});
 	
     });

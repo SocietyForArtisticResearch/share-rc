@@ -158,11 +158,12 @@ function startServer() {
 	wss.clients.forEach(function each(ws) {
 	    if (ws.isAlive === false) {
 		console.log(`A client of exposition ${ws.expositionId} has lost connection`);
-		removeReader(ws.expositionId);
+		//removeReader(ws.expositionId);
 		return ws.terminate();
 	    }
 	    ws.isAlive = false;
 	    ws.ping(noop);
+	    ws.send('connected');
 	});
     }, 30000);
     
